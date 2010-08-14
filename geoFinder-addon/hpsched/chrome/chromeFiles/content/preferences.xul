@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+
+
+<!-- Localization Information -->
+<!DOCTYPE overlay SYSTEM "chrome://hpsched/locale/hpsched.dtd">
+
+
+<overlay id="hpsched_preferences_overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <!-- Merge with the BrowserPreferences Window -->
+  <prefwindow id="BrowserPreferences">
+
+
+    <!-- Create a new pane (tab) for HP Scheduler. -->
+    <prefpane id="hpschedPane" label="&prefpane.label;" onpaneload="populateSchedulesList()"
+              image="chrome://hpsched/content/images/hpsched32.png">
+
+	<!-- Intermediary between GUI and preferences system -->
+      <preferences>
+        <preference id="defaultStartupHomepage" name="extensions.hpsched.defaultHomepage" type="string" />
+        <preference id="schedules" name="extensions.hpsched.schedules" type="string" />
+      </preferences>
+    
+
+      <!-- Include the javascript code -->
+      <script type="application/x-javascript" src="chrome://hpsched/content/browser.js" />
+      <script type="application/x-javascript" src="chrome://hpsched/content/preferences.js" />
+
+
+      <!-- Default Home Page area -->
+      <groupbox id="defaultGroupBox">
+        <caption label="&groupbox.defaultHomepage;" />
+        <hbox align="center">
+          <label value="&locations.label;" control="defaultStartupHomepage" />
+          <textbox class="padded" flex="1"
+			 preference="defaultStartupHomepage"
+			 id="defaultStartupHomepageField"
+                   type="autocomplete" autocompletesearch="history" />
+        </hbox>
+
+        <hbox align="center" pack="end">
+          <button label="&useCurrentPage.label;" id="defaultUseCurrent"
+                  oncommand="setToCurrentPage('defaultStartupHomepage');" />
+          <button label="&useBookmark.label;" id="defaultUseBookmark" 
+                  oncommand="setToBookmark('defaultStartupHomepage');" />
+          <button label="&useBlankPage.label;" id="defaultUseBlank" 
+                  oncommand="setToBlankPage('defaultStartupHomepage');" />
+        </hbox>
+      </groupbox>
+
+
+      <!-- List of Scheduled Home Pages -->
+      <groupbox id="schedulesListGroupBox">
+        <caption label="&groupbox.scheduledPages;" />
+  	  <tree id="schedulesTree" flex="1" seltype="single" hidecolumnpicker="true"
+		  preference-editable="true" preference="schedules"
+		  onsynctopreference="return saveSchedulesList();" rows="7">
+          <treecols>
+	      <treecol id="dateColLabel" label="&dateColumn;" flex="20" />
+	      <splitter class="tree-splitter" />
+	      <treecol id="startColLabel" label="&startColumn;" flex="20" />
+	      <splitter class="tree-splitter" />
+	      <treecol id="endColLabel" label="&endColumn;" flex="20" />
+	      <splitter class="tree-splitter" />
+	      <treecol id="urlColLabel" label="&locationsColumn;" flex="40" />
+	    </treecols>
+
+          <treechildren id="schedulesList">
+		<!-- to be populated by the javascript on pane load -->
+          </treechildren>
+	  </tree>
+
+
+        <!-- New and Delete Buttons -->
+	  <hbox pack="center">
+          <hbox pack="start" flex="40">
+            <button id="upButton" label="&up.label;" oncommand="move('up');" />
+            <button id="downButton" label="&down.label;" oncommand="move('down');" />
+          </hbox>
+          <spacer flex="10" />
+          <hbox pack="end" flex="50">
+            <button id="newButton" label="&newSchedule.button;" oncommand="newSchedule();" />
+  	      <button id="editButton" label="&editSchedule.button;" oncommand="editSchedule();" />
+  	      <button id="deleteButton" label="&deleteSchedule.button;" oncommand="deleteSchedule();" />
+          </hbox>
+        </hbox>
+      </groupbox>
+      
+
+      <!-- Create/Edit Schedule Options -->
+      <vbox id="scheduleEditorGroupBox">
+        <groupbox id="locationsGroupBox">
+          <caption label="&groupbox.editSchedule;" />
+          <hbox>
+	      <label value="&locations.label;" />
+            <textbox class="padded" flex="1" id="locationsField"
+			   type="autocomplete" autocompletesearch="history" />
+          </hbox>
+          <hbox pack="end">
+            <button label="&useCurrentPage.label;" id="locationUseCurrent"
+                    oncommand="setToCurrentPage('locationsField');" />
+            <button label="&useBookmark.label;" id="locationUseBookmark" 
+                    oncommand="setToBookmark('locationsField');" />
+            <button label="&useBlankPage.label;" id="locationUseBlank" 
+                    oncommand="setToBlankPage('locationsField');" />
+          </hbox>
+	  </groupbox>
+
+        <groupbox id="timeRangeGroupBox">
+          <caption label="&groupbox.timeRange;" />
+          <radiogroup id="timeChoice">
+            <vbox>
+              <hbox>
+                <radio label="&radio.timeRange;" value="range" id="timeRange" 
+                       onclick="radioTime('range', false);" />
+                <textbox id="startTimeField" width="60" />
+                <label value="&timeRange.to;" />
+                <textbox id="endTimeField" width="60" />  
+              </hbox>
+              <radio label="&radio.allDay;" value="allday" id="timeAllday" onclick="radioTime('allday', false);" />
+            </vbox>
+	    </radiogroup>
+        </groupbox> 
+
+
+        <groupbox id="dateRangeGroupBox">
+          <caption label="&groupbox.dateRange;" />
+          <radiogroup id="dateChoice">
+            <vbox>
+              <hbox>
+                <radio label="&radio.oneDay;" value="once" id="dateOnce" 
+                       onclick="radioDate('once', false);" />
+                <menulist id="dateMonth">
+                  <menupopup>
+                    <menuitem label="&month.1;" value="0" />
+                    <menuitem label="&month.2;" value="1" />
+                    <menuitem label="&month.3;" value="2" />
+                    <menuitem label="&month.4;" value="3" />
+                    <menuitem label="&month.5;" value="4" />
+                    <menuitem label="&month.6;" value="5" />
+                    <menuitem label="&month.7;" value="6" />
+                    <menuitem label="&month.8;" value="7" />
+                    <menuitem label="&month.9;" value="8" />
+                    <menuitem label="&month.10;" value="9" />
+                    <menuitem label="&month.11;" value="10" />
+                    <menuitem label="&month.12;" value="11" />
+                  </menupopup>
+                </menulist>
+
+                <menulist id="dateDay">
+                  <menupopup>
+                    <menuitem label="1" />
+                    <menuitem label="2" />
+                    <menuitem label="3" />
+                    <menuitem label="4" />
+                    <menuitem label="5" />
+                    <menuitem label="6" />
+                    <menuitem label="7" />
+                    <menuitem label="8" />
+                    <menuitem label="9" />
+                    <menuitem label="10" />
+                    <menuitem label="11" />
+                    <menuitem label="12" />
+                    <menuitem label="13" />
+                    <menuitem label="14" />
+                    <menuitem label="15" />
+                    <menuitem label="16" />
+                    <menuitem label="17" />
+                    <menuitem label="18" />
+                    <menuitem label="19" />
+                    <menuitem label="20" />
+                    <menuitem label="21" />
+                    <menuitem label="22" />
+                    <menuitem label="23" />
+                    <menuitem label="24" />
+                    <menuitem label="25" />
+                    <menuitem label="26" />
+                    <menuitem label="27" />
+                    <menuitem label="28" />
+                    <menuitem label="29" />
+                    <menuitem label="30" />
+                    <menuitem label="31" />
+                  </menupopup>
+                </menulist>
+
+                <menulist id="dateYear">
+                  <menupopup>
+                    <menuitem label="2005" />
+                    <menuitem label="2006" />
+                    <menuitem label="2007" />
+                    <menuitem label="2008" />
+                    <menuitem label="2009" />
+                  </menupopup>
+                </menulist>
+              </hbox>
+              <radio label="&radio.daily;" value="daily" id="dateDaily" onclick="radioDate('daily', false);" />
+            </vbox>
+          </radiogroup>
+        </groupbox> 
+
+	  <!-- hidden textbox to store the index of the schedule being modified -->
+	  <textbox id="editIndex" value="" hidden="true" />
+
+        <!-- Save and Cancel Buttons -->
+        <hbox pack="center">
+          <button id="saveButton" label="&saveSchedule.label;" oncommand="saveSchedule();" />
+	    <button id="cancelButton" label="&cancelSchedule.label;" oncommand="cancelSchedule();" />
+        </hbox>
+
+      </vbox>
+    </prefpane>
+
+  </prefwindow>
+
+</overlay>

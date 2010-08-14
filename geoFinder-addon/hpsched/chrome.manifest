@@ -1,0 +1,6 @@
+content   hpsched   chrome/chromeFiles/content/
+
+locale    hpsched   en-US   chrome/chromeFiles/locale/en-US/hpsched/
+
+overlay   chrome://browser/content/browser.xul   chrome://hpsched/content/browser.xul
+overlay   chrome://browser/content/preferences/preferences.xul   chrome://hpsched/content/preferences.xul

@@ -1,0 +1,247 @@
+<!-- Original script taken from: http://conversationswithmyself.com/googleMapDemo.html --> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"> 
+	<head> 
+		<style type="text/css"> 
+		<!--
+		h1 {
+			font-family:sans-serif;
+			color:blue;
+			text-align: center;
+			font-size:120%;
+		}
+		.tekst {
+			font-family:sans-serif;
+			color:blue;
+			font-size:100%;
+		}
+		.smalltekst {
+			font-family:sans-serif;
+			color:black;
+			font-size:80%;
+		}
+		-->	
+		</style> 
+		<style type="text/css"> 
+		v\:* {
+			behavior:url(#default#VML);
+		}
+		#apDiv1 {
+			position:absolute;
+			left:648px;
+			top:449px;
+			width:219px;
+			height:30px;
+			z-index:1;
+		}
+        #apDiv2 {
+	position:absolute;
+	left:850px;
+	top:628px;
+	width:288px;
+	height:86px;
+	z-index:2;
+}
+        #apDiv3 {
+	position:absolute;
+	left:852px;
+	top:826px;
+	width:307px;
+	height:107px;
+	z-index:3;
+}
+        #apDiv4 {
+	position:absolute;
+	left:851px;
+	top:589px;
+	width:172px;
+	height:28px;
+	z-index:4;
+}
+        #apDiv5 {	position:absolute;
+	left:851px;
+	top:589px;
+	width:172px;
+	height:28px;
+	z-index:4;
+}
+        #apDiv6 {
+	position:absolute;
+	left:853px;
+	top:725px;
+	width:172px;
+	height:106px;
+	z-index:4;
+}
+        #apDiv7 {
+	position:absolute;
+	left:837px;
+	top:589px;
+	width:289px;
+	height:95px;
+	z-index:5;
+}
+        </style> 
+    	<script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAF4PVqw0p5l92pEmE39k0MRQWxhPw7-SAnMb84NfHs4vQ3HTp4BTb-yeL6fQg7Up9d9idBGy5naXydw" type="text/javascript"></script> 
+        <script type="text/javascript" src="get.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
+    <script src="http://safe.mn/static/js/jquery.copy.js"></script>
+	<script type="text/javascript">
+	jQuery(document).ready(function($) {  
+        $('#shorten').click(function(e) {
+		e.preventDefault();
+		var url = $('#url').val();
+		$.getJSON("http://safe.mn/api/?format=jsonp&url=" + escape(url) + "&callback=?",
+	    function(data){
+	    if (data.url) {
+		$('#result').html('<input type="text" id="code" value="' + data.url + '">');
+	    }
+	    else if(data.error) {
+		$('#result').html('<span style="color: Red;" id="warning">' + data.error + '</span>');
+	    }
+	});
+    });
+
+});  
+</script>
+
+		<title>Google Maps Latitude, Longitude Popup</title> 
+</head> 
+	<body> 
+		<div id="apDiv1">
+		  <div align="center" class="tekst"><a href="index.html"><strong>Return to Home</strong></a></div>
+		</div>
+	    <div id="apDiv7">
+	      <p style="color:#5890A8; font-weight:bold; margin:0; padding:0;">Link for the Map beside</p>
+<p style="margin:0 0 2px; padding:0;">
+<textarea id="url" style="width: 400px" title="e.g.: http://www.google.com/"></textarea> 
+<input type="button" id="shorten" value="Shorten" /></p>
+<p style="margin:0 0 2px; padding:0;" id="result"></p>
+</div>
+    <h1>Google Maps Latitude, Longitude Popup</h1> 
+		<div style="width: 600px;" class="tekst"><b>Simply click  on the map on a location and it will provide you with the latitude and longitude in the callout window.</b></div> 
+		<div id="map" style="width: 600px; height: 400px"></div> 
+		<div id="geo" style="width: 300px;position: absolute;left: 620px;top: 100px;" class="tekst"> 
+		<form name="setLatLon" action="javascript:setLatLon()"> 
+			<b>* Coordinates:</b><br /> 
+			<table> 
+				<tr><td>* Lat:</td><td><input type='text' name='lat' id="frmLat"></td></tr> 
+				<tr><td>* Lon:</td><td><input type='text' name='lon' id="frmLon"></td></tr> 
+			</table> 
+			<p> 
+			  <label>Name
+			  <input type="text" name="name" id="name" />
+			  </label>
+			  <label></label>
+		  </p>
+	    <p>
+			  <input type="submit" name="setLatLon" value="Add">
+			  <label> &nbsp;
+			  <textarea name="generate" id="generate" cols="45" rows="5"></textarea>
+			  </label>
+	    </p>
+	    </form>
+        <form name="draw" action="javascript:mapping()">
+        	<a href="#map_canvas"><input type="submit" name="draw2" id="draw" value="Draw Map&gt;&gt;" /></a>
+        </form>
+	</div> 
+	
+    <script type="text/javascript"> 
+    //<![CDATA[
+	var geocoder = new GClientGeocoder();
+	var setLat = 17.379299;
+	var setLon = 78.497314;
+	// argItems code taken from 
+	// http://www.evolt.org/article/Javascript_to_Parse_URLs_in_the_Browser/17/14435/?format=print
+	function argItems (theArgName) {
+		sArgs = location.search.slice(1).split('&');
+    		r = '';
+    		for (var i = 0; i < sArgs.length; i++) {
+        		if (sArgs[i].slice(0,sArgs[i].indexOf('=')) == theArgName) {
+            			r = sArgs[i].slice(sArgs[i].indexOf('=')+1);
+            			break;
+        		}
+    		}
+    	return (r.length > 0 ? unescape(r).split(',') : '')
+	}
+	
+	
+	function getCoordForAddress(response) {
+	
+		if (!response || response.Status.code != 200) {
+	        alert("Sorry, we were unable to geocode that address\n\n Sorry,");
+	    } else {
+			place = response.Placemark[0];
+			setLat = place.Point.coordinates[1];
+			setLon = place.Point.coordinates[0];
+			setLat = setLat.toFixed(6);
+			setLon = setLon.toFixed(6);
+			document.getElementById("frmLat").value = setLat;
+			document.getElementById("frmLon").value = setLon;
+		}
+		placeMarker(setLat, setLon)
+    }
+	
+	
+	function placeMarker(setLat, setLon) {
+	
+		document.getElementById("frmLat").value = setLat;
+		document.getElementById("frmLon").value = setLon;
+	  
+		var map = new GMap(document.getElementById("map"));
+		
+		map.addControl(new GSmallMapControl()); // added
+		map.addControl(new GMapTypeControl()); // added
+		map.centerAndZoom(new GPoint(setLon, setLat), 12);
+		
+		var point = new GPoint(setLon, setLat);
+		var marker = new GMarker(point);
+		map.addOverlay(marker);
+		GEvent.addListener(map, 'click', function(overlay, point) {
+			if (overlay) {
+				map.removeOverlay(overlay);
+			} else if (point) {
+				map.recenterOrPanToLatLng(point);
+				var marker = new GMarker(point);
+				map.addOverlay(marker);
+				var matchll = /\(([-.\d]*), ([-.\d]*)/.exec( point );
+				if ( matchll ) { 
+					var lat = parseFloat( matchll[1] );
+					var lon = parseFloat( matchll[2] );
+					lat = lat.toFixed(6);
+					lon = lon.toFixed(6);
+					var message = "geotagged geo:lat=" + lat + " geo:lon=" + lon + " "; 
+					var messageRoboGEO = lat + ";" + lon + ""; 
+				} else { 
+					var message = "<b>Error extracting info from</b>:" + point + ""; 
+					var messagRoboGEO = message;
+				}
+				marker.openInfoWindowHtml(message);
+				document.getElementById("frmLat").value = lat;
+				document.getElementById("frmLon").value = lon;
+			}
+		});
+	}
+	function findAddress() {
+		myAddress = document.getElementById("address").value;
+		geocoder.getLocations(myAddress, getCoordForAddress);
+	
+	}
+	if (argItems("lat") == '' || argItems("lon") == '') {
+		placeMarker(setLat, setLon);
+    } else {
+		var setLat = parseFloat( argItems("lat") );
+		var setLon = parseFloat( argItems("lon") );
+		setLat = setLat.toFixed(6);
+	    setLon = setLon.toFixed(6);
+		placeMarker(setLat, setLon);
+    }
+    //]]>
+    </script> 
+<br><br><br><br>The following is the resultant of added places
+<br>
+
+    <div id="map_canvas" style="width: 800px; height: 500px"></div>
+    </h1>
+</body> 
+</html>

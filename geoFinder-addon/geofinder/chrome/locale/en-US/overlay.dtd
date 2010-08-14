@@ -1,0 +1,8 @@
+<!ENTITY geofinder.label "Your localized menuitem">
+<!ENTITY geofinderContext.label "Your Menuitem">
+<!ENTITY geofinderContext.accesskey "Y">
+<!ENTITY geofinderToolbarButton.label "Your Toolbar Button">
+<!ENTITY geofinderToolbarButton.tooltip "This is your toolbar button!">
+<!ENTITY geofinderSidebar.label "Your Sidebar">
+<!ENTITY geofinderToolbar.name  "example">
+<!ENTITY geofinderToolbar.label "This is an example toolbar. You can hide it under View &gt; toolbars &gt; &geofinderToolbar.name;">

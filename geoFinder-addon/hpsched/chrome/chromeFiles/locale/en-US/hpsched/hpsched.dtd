@@ -1,0 +1,40 @@
+<!ENTITY  menuitem.label             "HP Scheduler Options...">
+<!ENTITY  statusbar.tooltip.default  "Nothing Scheduled">
+<!ENTITY  prefpane.label             "HP Scheduler">
+<!ENTITY  locations.label            "Location(s):">
+<!ENTITY  useCurrentPage.label       "Use Current Page">
+<!ENTITY  useBookmark.label          "Use Bookmark...">
+<!ENTITY  useBlankPage.label         "Use Blank Page">
+<!ENTITY  groupbox.defaultHomepage   "Default Home Page">
+<!ENTITY  groupbox.scheduledPages    "Scheduled Home Pages">
+<!ENTITY  dateColumn                 "Date">
+<!ENTITY  startColumn                "Start Time">
+<!ENTITY  endColumn                  "End Time">
+<!ENTITY  locationsColumn            "Location(s)">
+<!ENTITY  newSchedule.button         "New Schedule">
+<!ENTITY  editSchedule.button        "Edit Schedule">
+<!ENTITY  deleteSchedule.button      "Delete Schedule">
+<!ENTITY  up.label                   "Up">
+<!ENTITY  down.label                 "Down">
+<!ENTITY  groupbox.editSchedule      "Schedule Editor">
+<!ENTITY  groupbox.timeRange         "Time Range">
+<!ENTITY  radio.timeRange            "Between the following times:">
+<!ENTITY  timeRange.to               " to ">
+<!ENTITY  radio.allDay               "All day">
+<!ENTITY  groupbox.dateRange         "Date Range">
+<!ENTITY  radio.oneDay               "Only on the following date:">
+<!ENTITY  radio.daily                "Daily">
+<!ENTITY  saveSchedule.label         "Save Schedule">
+<!ENTITY  cancelSchedule.label       "Cancel Schedule">
+<!ENTITY  month.1                    "January">
+<!ENTITY  month.2                    "February">
+<!ENTITY  month.3                    "March">
+<!ENTITY  month.4                    "April">
+<!ENTITY  month.5                    "May">
+<!ENTITY  month.6                    "June">
+<!ENTITY  month.7                    "July">
+<!ENTITY  month.8                    "August">
+<!ENTITY  month.9                    "September">
+<!ENTITY  month.10                   "October">
+<!ENTITY  month.11                   "November">
+<!ENTITY  month.12                   "December">

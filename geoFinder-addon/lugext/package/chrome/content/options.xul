@@ -1,0 +1,128 @@
+<?xml version="1.0"?> 
+
+<!-- add CSS stylesheets -->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://lugext/skin/lugext.css" type="text/css"?>
+
+<prefwindow xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+            id="LUG_Options"
+	    title="LUG Accumulator Options" 
+	    resizable="yes"
+            persist="width height screenX screenY"
+            onload="lug_loadedOptions = true;"
+            onunload="lug_loadedOptions = false;">
+
+  <prefpane id="lug_paneOptions" label="Options">
+    <!-- preferences this prefpane is going to access -->
+    <preferences>
+      <preference id="extensions.lugext.cubes" 
+                  name="extensions.lugext.cubes"   type="bool"/>
+      <preference id="extensions.lugext.confirm" 
+                  name="extensions.lugext.confirm" type="bool"/>
+      <preference id="extensions.lugext.ceiling" 
+                  name="extensions.lugext.ceiling" type="int"/>
+      <preference id="extensions.lugext.method" 
+                  name="extensions.lugext.method"  type="string"/>
+    </preferences>
+
+    <!-- scripts have to be included inside the prefpane (bug 296418) -->
+    <script type="application/javascript" src="chrome://lugext/content/lugext.js"/>
+
+    <description class="header">
+      Customize the functionality of the LUG accumulator.
+    </description>
+    <separator class="groove-thin"/>	
+    <separator class="thin"/>
+       
+      <groupbox>
+	<caption label="Preferences"/>
+        <!-- grid of rows and columns -->
+	<grid flex="1">
+	  <columns>
+	    <column/>
+	    <column/>
+	  </columns>
+	  <rows>
+	    <row>
+	      <checkbox id="extensions.lugext.confirm" 
+			preference="extensions.lugext.confirm" 
+			label="Ask for confirmation"/>
+	      <checkbox id="extensions.lugext.cubes"
+			preference="extensions.lugext.cubes"
+			label="Add cubes of numbers"/>
+	    </row>
+	    <row>
+              <hbox align="center">
+    	        <label value="Number to add up to"/>
+		<textbox id="extensions.lugext.ceiling"         maxlength="2"
+		         preference="extensions.lugext.ceiling" maxwidth="100" 
+       		         onblur="lug_validateCeiling();"/>  <!-- validate value on loss of focus -->
+              </hbox>
+	    </row>
+	  </rows>
+	</grid>
+      </groupbox>
+
+      <groupbox>
+	<caption label="Calculation Method"/>
+	<!-- the values to return from onsync*preference are correlated with the 
+             'value' attribute of the radios; onsynctopreference/onsyncfrompreference 
+             will be called also when clicking on a radio -->
+	<radiogroup id="extensions.lugext.method"
+		    preference="extensions.lugext.method"
+		    onsyncfrompreference="
+                      if (lug_loadedOptions)
+                        return;
+		      var method = lug_getPreference(LUG_METHOD);
+		      if (method == 'hard')
+			return 'hard';
+		      if (sortby == 'map_reduce')
+			return 'map_reduce';
+		      if (sortby == 'easy')
+			return 'easy';
+		      else
+			return 'hard';"
+		    onsynctopreference="
+		      var radios = document.getElementById(LUG_METHOD).childNodes;
+		      if (radios[1].selected) 
+			return 'easy';
+		      else if (radios[2].selected) 
+			return 'map_reduce';
+		      else
+			return 'hard';">
+          <radio label="the hard way"       value="hard"/>
+          <radio label="the easy way"       value="easy"/>
+          <radio label="the functional way" value="map_reduce"/>
+	</radiogroup>
+      </groupbox>
+
+  </prefpane>
+
+  <prefpane id="lug_paneAbout" label="About">
+    <!-- descriptions have to be broken up in parts to avoid oversizing the dialog -->
+    <description class="header">
+      LUG accumulator extension for Mozilla Firefox - version 0.1
+    </description>
+    <separator class="groove-thin"/>
+    <description>
+      This extension implements a simple accumulator in Firefox.
+    </description>
+    <description>
+      To download the latest version, please visit 
+      <label value="the extension page" class="text-link" 
+  	     href="http://www.cs.ucla.edu/~nikitas/lugext/"/>.
+    </description>
+    <hbox pack="left">
+      <image src="chrome://lugext/skin/uclalug-logo.jpg" width="233" height="50"/>
+    </hbox>
+    <description>          
+      The LUG accumulator is brought to you by Nikitas Liogkas (nikitas@acm.org), 
+    </description>
+    <description> 
+      and the UCLA Linux Users Group. Feel free to use the code any way you like.
+    </description>
+  </prefpane>
+
+</prefwindow>
+
+

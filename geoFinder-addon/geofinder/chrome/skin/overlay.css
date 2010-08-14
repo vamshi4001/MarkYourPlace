@@ -1,0 +1,22 @@
+/* This is just an example.  You shouldn't do this. */
+#geofinder-hello
+{
+  color: red ! important;
+}
+#geofinder-toolbar-button
+{
+  list-style-image: url("chrome://geofinder/skin/toolbar-button.png");
+  -moz-image-region: rect(0px 24px 24px 0px);
+}
+#geofinder-toolbar-button:hover
+{
+  -moz-image-region: rect(24px 24px 48px  0px);
+}
+[iconsize="small"] #geofinder-toolbar-button
+{
+  -moz-image-region: rect( 0px 40px 16px 24px);
+}
+[iconsize="small"] #geofinder-toolbar-button:hover
+{
+  -moz-image-region: rect(24px 40px 40px 24px);
+}

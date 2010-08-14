@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+
+<!-- Localization Information -->
+<!DOCTYPE overlay SYSTEM "chrome://hpsched/locale/hpsched.dtd">
+
+
+<overlay id="hpsched_browser_overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <!-- Include the javascript code -->
+  <script type="application/x-javascript" src="chrome://hpsched/content/browser.js" />
+  <script type="application/x-javascript" src="chrome://browser/content/utilityOverlay.js" />
+
+
+  <!-- Init only if this is an actual browser window (not prefs or something) -->
+  <window id="main-window">
+    <script type="application/x-javascript">
+	window.addEventListener("load", HPsched_init, false);
+    </script>
+  </window>
+
+
+  <!-- Add the HPsched icon to the bottom right of screen -->
+  <statusbar id="status-bar">
+    <statusbarpanel class="statusbarpanel-iconic" id="hpsched_sbi"
+			  tooltiptext="&statusbar.tooltip.default;"
+			  onclick="openPreferences('hpschedPane');"
+                    src="chrome://hpsched/content/images/hpsched18.png" />
+  </statusbar>
+
+
+  <!-- Create an HPsched menu item -->
+  <menupopup id="menu_ToolsPopup">
+    <menuitem label="&menuitem.label;"
+		  insertafter="devToolsSeparator" 
+              oncommand="openPreferences('hpschedPane');" />
+  </menupopup>
+
+</overlay>

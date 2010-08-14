@@ -1,0 +1,7 @@
+content   geofinder                 chrome/content/
+skin      geofinder   classic/1.0   chrome/skin/
+locale    geofinder   en-US         chrome/locale/en-US/
+
+
+overlay   chrome://browser/content/browser.xul   chrome://geofinder/content/ff-overlay.xul
+style chrome://global/content/customizeToolbar.xul chrome://geofinder/skin/overlay.css

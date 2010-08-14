@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://geofinder/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://geofinder/locale/overlay.dtd">
+<overlay id="geofinder-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script src="overlay.js"/>
+  <script src="ff-overlay.js"/>
+
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="geofinder-strings" src="chrome://geofinder/locale/overlay.properties"/>
+  </stringbundleset>
+
+  <menupopup id="menu_ToolsPopup">
+    <menuitem id="geofinder-hello" label="&geofinder.label;"
+              oncommand="geofinder.onMenuItemCommand(event);"/>
+  </menupopup>
+
+  <popup id="contentAreaContextMenu">
+    <menuitem id="context-geofinder" label="&geofinderContext.label;"
+              accesskey="&geofinderContext.accesskey;"
+              insertafter="context-stop"
+              oncommand="geofinder.onMenuItemCommand(event)"/>
+  </popup>
+
+  <toolbarpalette id="BrowserToolbarPalette">
+  <toolbarbutton id="geofinder-toolbar-button" class="toolbarbutton-1 chromeclass-toolbar-additional"
+    label="&geofinderToolbarButton.label;" tooltiptext="&geofinderToolbarButton.tooltip;"
+    oncommand="geofinder.onToolbarButtonCommand()"/>
+  </toolbarpalette>
+
+  <toolbox id="navigator-toolbox">
+    <toolbar class="chromeclass-toolbar" toolbarname="&geofinderToolbar.name;" customizable="true" id="geofinder-toolbar">
+      <label value="&geofinderToolbar.label;"/>
+    </toolbar>
+  </toolbox>
+
+  <menupopup id="viewSidebarMenu">
+    <menuitem key="key_openSidebar_geofinder" observes="viewSidebar_geofinder" />
+  </menupopup>
+
+  <keyset id="mainKeyset">
+    <key id="key_openSidebar_geofinder" command="viewSidebar_geofinder" />
+  </keyset>
+
+  <broadcasterset id="mainBroadcasterSet">
+    <broadcaster id="viewSidebar_geofinder"
+                 label="&geofinderSidebar.label;"
+                 autoCheck="false"
+                 type="checkbox"
+                 group="sidebar"
+                 sidebarurl="chrome://geofinder/content/ff-sidebar.xul"
+                 sidebartitle="&geofinderSidebar.label;"
+                 oncommand="toggleSidebar('viewSidebar_geofinder');" />
+  </broadcasterset>
+
+</overlay>

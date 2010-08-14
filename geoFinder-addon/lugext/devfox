@@ -1,0 +1,8 @@
+#!/bin/bash
+export MOZ_NO_REMOTE=1
+
+# first create a new profile
+/home/<user>/firefox2/firefox -ProfileManager
+
+# then open Firefox with that profile
+#/home/<user>/firefox2/firefox -P <profile_name>

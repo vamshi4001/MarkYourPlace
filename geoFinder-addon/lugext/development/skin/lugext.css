@@ -1,0 +1,19 @@
+/* color menu item */
+#lugExtension {
+  color: rgb(100%, 0%, 0%);
+ }
+
+/* make options dialog inherit background color from theme */
+#LUG_Options {
+  -moz-appearance: inherit !important;
+} 
+
+/* options dialog navigation icons; they have to be 32x32 */
+#LUG_Options radio[pane=lug_paneOptions] {
+  list-style-image: url("chrome://browser/skin/preferences/Options.png"); 
+  -moz-image-region: rect(0px, 32px,  32px, 0px);
+}
+
+#LUG_Options radio[pane=lug_paneAbout] {
+  list-style-image: url("chrome://lugext/skin/lugext-icon.png"); 
+}

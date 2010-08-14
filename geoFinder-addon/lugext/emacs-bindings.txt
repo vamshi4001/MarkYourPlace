@@ -1,0 +1,9 @@
+; JavaScript mode
+(require 'generic-x)
+(add-to-list 'generic-extras-enable-list 'javascript-generic-mode)
+
+; XML mode for .xul and rdf files
+(autoload 'sgml-mode "sgml-mode" "Major mode for editing XML programs." t)
+(setq auto-mode-alist (cons '("\\.xul$" . sgml-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.rdf$" . sgml-mode) auto-mode-alist))
+

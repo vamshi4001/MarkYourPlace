@@ -1,0 +1,12 @@
+Addon
+
+https://addons.mozilla.org/en-US/developers/docs/getting-started
+http://lifehacker.com/software/greasemonkey/turn-your-greasemonkey-scripts-into-firefox-extensions-164741.php
+
+http://ted.mielczarek.org/code/mozilla/extensiondev/
+http://lifehacker.com/264490/how-to-build-a-firefox-extension
+
+http://roachfiend.com/archives/2004/12/08/how-to-create-firefox-extensions/
+https://developer.mozilla.org/en/Building_an_Extension
+https://developer.mozilla.org/En/XUL
+http://kb.mozillazine.org/Windows_build_script

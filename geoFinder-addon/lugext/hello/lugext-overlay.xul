@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<!-- stylesheets have to be outside the overlay -->
+<?xml-stylesheet href="chrome://lugext/skin/lugext.css" type="text/css"?>  
+
+<overlay id="lugext-overlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+  <!-- include the script -->
+  <script type="application/javascript" src="chrome://lugext/content/lugext.js"/>
+  
+  <menupopup id="menu_ToolsPopup">
+    <!-- add menu item -->
+    <menuitem id="lugExtension" label="LUG hello" insertafter="sanitizeSeparator"
+      accesskey="L" key="key_lugExtension" command="cmd_lugExtension"/>
+  </menupopup>
+
+  <keyset id="mainKeyset">
+    <!-- define keyboard shortcut -->
+    <key id="key_lugExtension" modifiers="accel,shift" key="L" command="cmd_lugExtension"/>
+  </keyset>
+
+  <commandset id="mainCommandSet">
+    <!-- command to execute for both menu item and keyboard shortcut -->
+    <command id="cmd_lugExtension" oncommand="lug_hello();"/>
+  </commandset>
+ 
+</overlay>

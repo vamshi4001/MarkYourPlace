@@ -1,0 +1,36 @@
+Usage
+========
+
+Initially open the file "index.html" in your favourite browser.
+In the map that is visible, you can mark the locations of your choice.
+You can deselect a point by clicking on same marker thats visible.
+
+As and when you mark, the latitude and longitude corresponding to that place will be displayed in 2 textboxes resinding next to map.
+these will show the coordinates of last marked point on map.
+
+Just enter the name corresponding to that location in the Name field and click "Add".this makes it added to an array of objects "locs".(each object contains 'name', 'lat', 'long').
+then select or mark another point and keep adding.
+
+After you have finished adding the locations, click on Draw Map button, that will mark all your points on another map.
+
+the difference between 2 maps is 
+			first is editable and second is not.
+			
+We'll get a static map link beside it and can be shortened.
+this static map link will allow us to use this map anywhere. we can just copy paste the static map link or the shortened one and get our map.
+
+Eg.
+StaticMap link for marking IIITH, IIITB and IIITM-K is as follows:
+
+http://maps.google.com/maps/api/staticmap?center=17.379299,78.497314&zoom=5&size=800x512&markers=17.446035,78.349943&markers=12.844585,77.663212&markers=8.559367,76.879234&sensor=false
+
+Shortened link is http://safe.mn/8Da
+
+
+Code
+====
+The index.html, most of the part is usage of Placemarker API and some argument creation which is from net.
+
+"get.js" is the file that is written by us for our purposes as a part of our application.
+
+Shortnening of URL has been taken from http://safe.mn/tools/#automatic

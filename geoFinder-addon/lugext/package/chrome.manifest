@@ -1,0 +1,5 @@
+content	lugext jar:chrome/lugext.jar!/content/
+skin lugext classic/1.0 jar:chrome/lugext.jar!/skin/
+
+overlay	chrome://browser/content/browser.xul chrome://lugext/content/lugext-overlay.xul
+

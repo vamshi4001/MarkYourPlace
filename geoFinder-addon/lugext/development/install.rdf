@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+  <Description about="urn:mozilla:install-manifest">
+
+    <em:id>lugext@ucla</em:id>
+    <em:name>LUG extension</em:name>
+    <em:version>0.1</em:version>
+    <!-- this is an extension, not a theme -->
+    <em:type>2</em:type>
+    <em:description>Sample extension for the LUG tutorial</em:description>
+
+    <em:creator>Nikitas Liogkas (nikitas@acm.org)</em:creator>
+    <em:contributor>Shant Hovsepian (talk organizer)</em:contributor>
+    <em:contributor>UCLA LUG</em:contributor>
+
+    <em:homepageURL>http://www.cs.ucla.edu/~nikitas/lugext/</em:homepageURL>
+    <em:iconURL>chrome://lugext/skin/lugext-icon.png</em:iconURL>
+ 
+    <!-- hack to make the options dialog resizable on Windows -->
+    <em:optionsURL>javascript:opener.openDialog('chrome://lugext/content/options.xul', '', 
+	'chrome, modal, toolbar, resizable'); window.close();</em:optionsURL>
+    
+    <!-- Mozilla Add-ons will not accept a .xpi with this property -->
+    <em:updateURL>http://www.cs.ucla.edu/~nikitas/lugext/lugext_update.rdf</em:updateURL>
+	
+    <!-- Firefox -->
+    <em:targetApplication>
+      <Description>
+      <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+      <em:minVersion>2.0</em:minVersion>
+      <em:maxVersion>2.0.0.*</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+
+  </Description>
+
+</RDF>
